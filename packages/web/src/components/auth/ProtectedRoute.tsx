@@ -1,4 +1,4 @@
-﻿// ============================================================================
+// ============================================================================
 // Protected Route Component
 // Wraps routes that require authentication
 // Redirects to login if user is not authenticated
@@ -37,4 +37,5 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   // Authenticated - render children
   return <>{children}</>;
 }
+
 

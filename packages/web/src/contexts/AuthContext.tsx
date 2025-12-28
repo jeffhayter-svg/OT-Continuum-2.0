@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // Auth Context
 // Manages authentication state across the application
 // Provides session data and auth status to all components
@@ -6,7 +6,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../../../../lib/supabase-client';
+import { supabase } from "../lib/supabase";
 
 interface AuthContextType {
   user: User | null;
@@ -65,3 +65,4 @@ export function useAuth() {
   }
   return context;
 }
+

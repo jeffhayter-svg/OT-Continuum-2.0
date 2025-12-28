@@ -1,0 +1,368 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * OT CONTINUUM DESIGN SYSTEM — AUTHORITATIVE
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * This is the single source of truth for all visual design decisions
+ * in the OT Continuum platform. All components, screens, and layouts
+ * must reference these tokens.
+ * 
+ * VERSION: 1.0.0
+ * LAST UPDATED: 2025-12-26
+ * STATUS: DESIGN FROZEN
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+:root {
+  /* =========================================================================
+   * 1. TYPOGRAPHY
+   * =========================================================================
+   * Font family: Inter (primary typeface for all text)
+   */
+  
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Courier New', monospace;
+  
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  
+  
+  /* =========================================================================
+   * 2. COLOR SYSTEM
+   * =========================================================================
+   * Brand colors derived from InnoTech Engineering identity
+   */
+  
+  /* Primary / Accent */
+  --color-primary: #FFCC00;
+  --color-primary-hover: #FFD633;
+  --color-primary-active: #E6B800;
+  --color-primary-muted: rgba(255, 204, 0, 0.15);
+  
+  /* Background Layers */
+  --color-bg-app: #000000;
+  --color-bg-surface: #1A1A1A;
+  --color-bg-elevated-1: #2A2A2A;
+  --color-bg-elevated-2: #333333;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #CCCCCC;
+  --color-text-tertiary: #999999;
+  --color-text-muted: #666666;
+  --color-text-disabled: #444444;
+  --color-text-on-primary: #000000;
+  
+  /* Semantic Colors */
+  --color-success: #44FF44;
+  --color-success-hover: #55FF55;
+  --color-success-muted: rgba(68, 255, 68, 0.15);
+  
+  --color-warning: #FFCC00;
+  --color-warning-hover: #FFD633;
+  --color-warning-muted: rgba(255, 204, 0, 0.15);
+  
+  --color-danger: #FF4444;
+  --color-danger-hover: #FF5555;
+  --color-danger-muted: rgba(255, 68, 68, 0.15);
+  
+  --color-info: #44CCFF;
+  --color-info-hover: #55D6FF;
+  --color-info-muted: rgba(68, 204, 255, 0.15);
+  
+  /* Border Colors */
+  --color-border-default: rgba(255, 255, 255, 0.2);
+  --color-border-muted: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.3);
+  --color-border-focus: var(--color-primary);
+  
+  /* Utility Colors */
+  --color-teal: #44FFF4;
+  --color-pink: #FF4499;
+  --color-purple: #AA44FF;
+  
+  
+  /* =========================================================================
+   * 3. SPACING SCALE
+   * =========================================================================
+   * Consistent spacing units for margins, padding, and gaps
+   */
+  
+  --spacing-0: 0;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  
+  /* Semantic Spacing Aliases */
+  --spacing-xs: var(--spacing-1);
+  --spacing-sm: var(--spacing-2);
+  --spacing-md: var(--spacing-3);
+  --spacing-lg: var(--spacing-4);
+  --spacing-xl: var(--spacing-6);
+  --spacing-2xl: var(--spacing-8);
+  --spacing-3xl: var(--spacing-12);
+  
+  
+  /* =========================================================================
+   * 4. BORDER RADIUS
+   * =========================================================================
+   * Consistent corner rounding for components
+   */
+  
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  
+  /* =========================================================================
+   * 5. ELEVATION / SHADOWS
+   * =========================================================================
+   * Depth and layering through shadows
+   */
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 16px 64px rgba(0, 0, 0, 0.7);
+  
+  /* Colored Shadows (for focus/hover states) */
+  --shadow-primary: 0 0 0 3px rgba(255, 204, 0, 0.1);
+  --shadow-primary-strong: 0 4px 16px rgba(255, 204, 0, 0.3);
+  --shadow-success: 0 0 0 3px rgba(68, 255, 68, 0.1);
+  --shadow-danger: 0 0 0 3px rgba(255, 68, 68, 0.1);
+  
+  
+  /* =========================================================================
+   * 6. TRANSITIONS / TIMING
+   * =========================================================================
+   * Consistent animation durations and easing
+   */
+  
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+  
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Common Transitions */
+  --transition-colors: color var(--duration-normal) var(--ease-out),
+                       background-color var(--duration-normal) var(--ease-out),
+                       border-color var(--duration-normal) var(--ease-out);
+  --transition-all: all var(--duration-normal) var(--ease-out);
+  --transition-transform: transform var(--duration-fast) var(--ease-out);
+  
+  
+  /* =========================================================================
+   * 7. COMPONENT DIMENSIONS
+   * =========================================================================
+   * Standard sizes for interactive elements
+   */
+  
+  /* Button Heights */
+  --height-button-sm: 36px;
+  --height-button-md: 44px;
+  --height-button-lg: 52px;
+  
+  /* Input Heights */
+  --height-input-sm: 36px;
+  --height-input-md: 44px;
+  --height-input-lg: 52px;
+  
+  /* Icon Sizes */
+  --size-icon-xs: 12px;
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --size-icon-xl: 32px;
+  
+  /* Avatar Sizes */
+  --size-avatar-sm: 32px;
+  --size-avatar-md: 40px;
+  --size-avatar-lg: 48px;
+  --size-avatar-xl: 64px;
+  
+  
+  /* =========================================================================
+   * 8. Z-INDEX SCALE
+   * =========================================================================
+   * Layering hierarchy for overlays and modals
+   */
+  
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-notification: 800;
+  
+  
+  /* =========================================================================
+   * 9. INTERACTIVE STATES
+   * =========================================================================
+   * State-based opacity and visual modifications
+   */
+  
+  --opacity-disabled: 0.5;
+  --opacity-hover: 0.9;
+  --opacity-loading: 0.7;
+  --opacity-overlay: 0.8;
+  
+  
+  /* =========================================================================
+   * 10. BREAKPOINTS
+   * =========================================================================
+   * Responsive design breakpoints
+   */
+  
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  
+  
+  /* =========================================================================
+   * 11. LAYOUT CONSTRAINTS
+   * =========================================================================
+   * Maximum widths for content areas
+   */
+  
+  --max-width-sm: 640px;
+  --max-width-md: 768px;
+  --max-width-lg: 1024px;
+  --max-width-xl: 1280px;
+  --max-width-2xl: 1536px;
+  --max-width-prose: 65ch;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * COMPONENT-SPECIFIC TOKEN GROUPS
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+:root {
+  /* Button Tokens */
+  --button-padding-x-sm: var(--spacing-4);
+  --button-padding-y-sm: var(--spacing-2);
+  --button-padding-x-md: var(--spacing-6);
+  --button-padding-y-md: var(--spacing-3);
+  --button-padding-x-lg: var(--spacing-8);
+  --button-padding-y-lg: var(--spacing-4);
+  
+  /* Input Tokens */
+  --input-padding-x: var(--spacing-4);
+  --input-padding-y: var(--spacing-3);
+  --input-border-width: 1px;
+  --input-focus-ring-width: 3px;
+  
+  /* Card Tokens */
+  --card-padding-sm: var(--spacing-4);
+  --card-padding-md: var(--spacing-6);
+  --card-padding-lg: var(--spacing-8);
+  --card-border-width: 1px;
+  
+  /* Table Tokens */
+  --table-cell-padding-x: var(--spacing-4);
+  --table-cell-padding-y: var(--spacing-3);
+  --table-header-bg: var(--color-bg-elevated-1);
+  --table-row-hover-bg: rgba(255, 255, 255, 0.05);
+  
+  /* Badge Tokens */
+  --badge-padding-x: var(--spacing-3);
+  --badge-padding-y: var(--spacing-1);
+  --badge-border-width: 1px;
+  
+  /* Alert Tokens */
+  --alert-padding-x: var(--spacing-4);
+  --alert-padding-y: var(--spacing-3);
+  --alert-border-width: 1px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * USAGE GUIDELINES
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * TYPOGRAPHY:
+ * - Titles/Section Headers: Inter Semibold, 20–24px (--font-size-xl to --font-size-2xl)
+ * - Body Text: Inter Regular, 14–16px (--font-size-sm to --font-size-base)
+ * - Small/Helper Text: Inter Regular, 12px (--font-size-xs)
+ * 
+ * COLOR USAGE:
+ * - Primary Action: --color-primary (#FFCC00)
+ * - App Background: --color-bg-app (#000000)
+ * - Surfaces/Panels: --color-bg-surface (#1A1A1A)
+ * - Primary Text: --color-text-primary (#FFFFFF)
+ * - Secondary Text: --color-text-secondary (#CCCCCC)
+ * - Success: --color-success (#44FF44)
+ * - Warning: --color-warning (same as primary)
+ * - Danger: --color-danger (#FF4444)
+ * 
+ * SPACING:
+ * - Use spacing scale consistently (--spacing-1 through --spacing-24)
+ * - Prefer semantic aliases (xs, sm, md, lg, xl, 2xl, 3xl)
+ * - Maintain 4px baseline grid
+ * 
+ * INTERACTIVE STATES:
+ * - Hover: Slight color shift + subtle shadow
+ * - Focus: Primary color ring (--shadow-primary)
+ * - Active: Darker primary color
+ * - Disabled: 50% opacity (--opacity-disabled)
+ * 
+ * ELEVATION:
+ * - Cards: --shadow-md
+ * - Dropdowns: --shadow-lg
+ * - Modals: --shadow-xl
+ * - Tooltips: --shadow-sm
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════
+ */

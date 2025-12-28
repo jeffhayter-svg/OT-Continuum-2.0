@@ -1,0 +1,11 @@
+{
+  "name": "ot-continuum",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix packages/web run dev",
+    "build": "npm --prefix packages/web run build",
+    "preview": "npm --prefix packages/web run preview"
+  }
+}
+

@@ -1,0 +1,35 @@
+{
+  "name": "@ot-continuum/api",
+  "version": "1.0.0",
+  "description": "OT Continuum API - OpenAPI specification and tooling",
+  "private": true,
+  "scripts": {
+    "lint:openapi": "spectral lint openapi/main.yaml --ruleset openapi/.spectral.yaml",
+    "lint:openapi:verbose": "spectral lint openapi/main.yaml --ruleset openapi/.spectral.yaml --verbose",
+    "validate:openapi": "openapi-cli validate openapi/main.yaml",
+    "validate:openapi:stats": "openapi-cli stats openapi/main.yaml",
+    "bundle:openapi": "openapi-cli bundle openapi/main.yaml --output dist/openapi.yaml",
+    "preview:openapi": "redocly preview-docs openapi/main.yaml",
+    "build:docs": "redocly build-docs openapi/main.yaml --output dist/docs/index.html",
+    "test": "npm run lint:openapi && npm run validate:openapi",
+    "ci": "npm run lint:openapi && npm run validate:openapi && npm run bundle:openapi"
+  },
+  "devDependencies": {
+    "@redocly/openapi-cli": "^1.0.0-beta.120",
+    "@stoplight/spectral-cli": "^6.11.0",
+    "@stoplight/spectral-core": "^1.18.3",
+    "@stoplight/spectral-formats": "^1.6.0",
+    "@stoplight/spectral-functions": "^1.7.2",
+    "@stoplight/spectral-parsers": "^1.0.3",
+    "@stoplight/spectral-rulesets": "^1.18.1"
+  },
+  "keywords": [
+    "openapi",
+    "api",
+    "specification",
+    "rest",
+    "ot-continuum"
+  ],
+  "author": "OT Continuum Team",
+  "license": "UNLICENSED"
+}

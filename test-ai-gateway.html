@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Gateway Tester</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      border-left: 4px solid #4CAF50;
+    }
+    .section.error {
+      border-left-color: #f44336;
+      background: #fff5f5;
+    }
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    button.secondary {
+      background: #2196F3;
+    }
+    button.secondary:hover {
+      background: #0b7dda;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .status.warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .help {
+      background: #e3f2fd;
+      border-left: 4px solid #2196F3;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 4px;
+    }
+    .help h4 {
+      margin-top: 0;
+      color: #1976D2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 AI Gateway Tester</h1>
+    <p class="subtitle">Test your OT Continuum AI Gateway Edge Function</p>
+
+    <!-- Configuration Section -->
+    <div class="section">
+      <h3>1️⃣ Configuration</h3>
+      <label>
+        <strong>Supabase URL:</strong>
+        <input type="text" id="supabaseUrl" placeholder="https://your-project-ref.supabase.co" />
+      </label>
+      <label>
+        <strong>Supabase Anon Key:</strong>
+        <input type="password" id="anonKey" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." />
+      </label>
+      <button onclick="initSupabase()">Initialize Supabase</button>
+      <span id="initStatus"></span>
+    </div>
+
+    <!-- Auth Section -->
+    <div class="section">
+      <h3>2️⃣ Authentication</h3>
+      <label>
+        <strong>Email:</strong>
+        <input type="email" id="email" placeholder="user@example.com" />
+      </label>
+      <label>
+        <strong>Password:</strong>
+        <input type="password" id="password" placeholder="your-password" />
+      </label>
+      <button onclick="signIn()">Sign In</button>
+      <button class="secondary" onclick="checkSession()">Check Session</button>
+      <span id="authStatus"></span>
+      <pre id="authOutput" style="display:none"></pre>
+    </div>
+
+    <!-- Tenant Section -->
+    <div class="section">
+      <h3>3️⃣ Tenant ID</h3>
+      <label>
+        <strong>Tenant ID (UUID):</strong>
+        <input type="text" id="tenantId" placeholder="00000000-0000-0000-0000-000000000000" />
+      </label>
+      <button class="secondary" onclick="fetchTenant()">Get from Database</button>
+      <span id="tenantStatus"></span>
+    </div>
+
+    <!-- Test Section -->
+    <div class="section">
+      <h3>4️⃣ Test AI Gateway</h3>
+      <button onclick="testAIGateway()">🚀 Test AI Gateway</button>
+      <button class="secondary" onclick="runDiagnostics()">🔍 Run Full Diagnostics</button>
+      <span id="testStatus"></span>
+      <pre id="testOutput" style="display:none"></pre>
+    </div>
+
+    <!-- Help Section -->
+    <div class="help">
+      <h4>💡 Quick Help</h4>
+      <ul>
+        <li><strong>No Supabase credentials?</strong> Find them in Supabase Dashboard → Project Settings → API</li>
+        <li><strong>No account?</strong> Create one in your app first, then use those credentials here</li>
+        <li><strong>Function not found (404)?</strong> Deploy it: <code>npx supabase functions deploy ai_gateway</code></li>
+        <li><strong>Still not working?</strong> Open browser DevTools (F12) and check Console + Network tabs</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let supabase;
+
+    // Initialize Supabase
+    function initSupabase() {
+      const url = document.getElementById('supabaseUrl').value.trim();
+      const key = document.getElementById('anonKey').value.trim();
+      const statusEl = document.getElementById('initStatus');
+
+      if (!url || !key) {
+        statusEl.innerHTML = '<span class="status error">Please fill in URL and Key</span>';
+        return;
+      }
+
+      try {
+        supabase = window.supabase.createClient(url, key);
+        statusEl.innerHTML = '<span class="status success">✅ Initialized</span>';
+        console.log('Supabase client initialized');
+      } catch (err) {
+        statusEl.innerHTML = '<span class="status error">❌ Failed: ' + err.message + '</span>';
+        console.error('Init error:', err);
+      }
+    }
+
+    // Sign in
+    async function signIn() {
+      if (!supabase) {
+        alert('Please initialize Supabase first (Step 1)');
+        return;
+      }
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const statusEl = document.getElementById('authStatus');
+      const outputEl = document.getElementById('authOutput');
+
+      if (!email || !password) {
+        statusEl.innerHTML = '<span class="status error">Please fill in email and password</span>';
+        return;
+      }
+
+      statusEl.innerHTML = '<span class="status warning">Signing in...</span>';
+
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        statusEl.innerHTML = '<span class="status success">✅ Signed in</span>';
+        outputEl.style.display = 'block';
+        outputEl.textContent = JSON.stringify({
+          user: data.user.email,
+          jwt_prefix: data.session.access_token.slice(0, 20) + '...',
+          expires_at: new Date(data.session.expires_at * 1000).toLocaleString()
+        }, null, 2);
+
+        console.log('Signed in:', data.user.email);
+      } catch (err) {
+        statusEl.innerHTML = '<span class="status error">❌ ' + err.message + '</span>';
+        console.error('Sign in error:', err);
+      }
+    }
+
+    // Check session
+    async function checkSession() {
+      if (!supabase) {
+        alert('Please initialize Supabase first (Step 1)');
+        return;
+      }
+
+      const statusEl = document.getElementById('authStatus');
+      const outputEl = document.getElementById('authOutput');
+
+      try {
+        const { data, error } = await supabase.auth.getSession();
+
+        if (error) throw error;
+
+        if (data.session) {
+          statusEl.innerHTML = '<span class="status success">✅ Active session</span>';
+          outputEl.style.display = 'block';
+          outputEl.textContent = JSON.stringify({
+            user: data.session.user.email,
+            jwt_prefix: data.session.access_token.slice(0, 20) + '...',
+            expires_at: new Date(data.session.expires_at * 1000).toLocaleString()
+          }, null, 2);
+        } else {
+          statusEl.innerHTML = '<span class="status error">❌ No active session</span>';
+          outputEl.style.display = 'none';
+        }
+      } catch (err) {
+        statusEl.innerHTML = '<span class="status error">❌ ' + err.message + '</span>';
+        console.error('Session check error:', err);
+      }
+    }
+
+    // Fetch tenant from database
+    async function fetchTenant() {
+      if (!supabase) {
+        alert('Please initialize Supabase first (Step 1)');
+        return;
+      }
+
+      const statusEl = document.getElementById('tenantStatus');
+      statusEl.innerHTML = '<span class="status warning">Fetching...</span>';
+
+      try {
+        const { data, error } = await supabase
+          .from('tenants')
+          .select('tenant_id, org_name')
+          .limit(1);
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          document.getElementById('tenantId').value = data[0].tenant_id;
+          statusEl.innerHTML = '<span class="status success">✅ ' + (data[0].org_name || 'Found') + '</span>';
+        } else {
+          statusEl.innerHTML = '<span class="status error">❌ No tenants found</span>';
+        }
+      } catch (err) {
+        statusEl.innerHTML = '<span class="status error">❌ ' + err.message + '</span>';
+        console.error('Fetch tenant error:', err);
+      }
+    }
+
+    // Test AI Gateway
+    async function testAIGateway() {
+      if (!supabase) {
+        alert('Please initialize Supabase first (Step 1)');
+        return;
+      }
+
+      const tenantId = document.getElementById('tenantId').value.trim();
+      if (!tenantId) {
+        alert('Please enter a tenant ID (Step 3)');
+        return;
+      }
+
+      const statusEl = document.getElementById('testStatus');
+      const outputEl = document.getElementById('testOutput');
+
+      statusEl.innerHTML = '<span class="status warning">Testing...</span>';
+      outputEl.style.display = 'none';
+
+      try {
+        // Get session
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        if (!sessionData.session) throw new Error('No active session - please sign in first');
+
+        const token = sessionData.session.access_token;
+        const url = document.getElementById('supabaseUrl').value.trim();
+        const anonKey = document.getElementById('anonKey').value.trim();
+
+        // Call AI Gateway
+        console.log('Calling AI Gateway...');
+        const startTime = performance.now();
+
+        const res = await fetch(`${url}/functions/v1/ai_gateway`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'apikey': anonKey,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tenant_id: tenantId,
+            mode: 'chat',
+            use_case: 'signal_assistant',
+            input: {
+              question: 'What does a spike in failed PLC heartbeats usually indicate?'
+            },
+            context: {
+              asset_type: 'PLC',
+              signal: 'heartbeat_failures'
+            }
+          })
+        });
+
+        const duration = Math.round(performance.now() - startTime);
+        const responseText = await res.text();
+
+        outputEl.style.display = 'block';
+
+        if (res.ok) {
+          const result = JSON.parse(responseText);
+          statusEl.innerHTML = `<span class="status success">✅ Success (${duration}ms)</span>`;
+          outputEl.textContent = JSON.stringify(result, null, 2);
+          console.log('AI Gateway response:', result);
+        } else {
+          statusEl.innerHTML = `<span class="status error">❌ Error ${res.status}</span>`;
+          outputEl.textContent = `Status: ${res.status}\n\n${responseText}`;
+          console.error('AI Gateway error:', res.status, responseText);
+        }
+
+      } catch (err) {
+        statusEl.innerHTML = '<span class="status error">❌ ' + err.message + '</span>';
+        outputEl.style.display = 'block';
+        outputEl.textContent = err.stack || err.message;
+        console.error('Test error:', err);
+      }
+    }
+
+    // Run full diagnostics
+    async function runDiagnostics() {
+      if (!supabase) {
+        alert('Please initialize Supabase first (Step 1)');
+        return;
+      }
+
+      const outputEl = document.getElementById('testOutput');
+      const statusEl = document.getElementById('testStatus');
+
+      statusEl.innerHTML = '<span class="status warning">Running diagnostics...</span>';
+      outputEl.style.display = 'block';
+      outputEl.textContent = 'Running diagnostics...\n';
+
+      const log = (msg) => {
+        outputEl.textContent += msg + '\n';
+      };
+
+      try {
+        // 1. Check session
+        log('\n1️⃣ Checking session...');
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        if (sessionData.session) {
+          log('   ✅ Session active: ' + sessionData.session.user.email);
+          log('   JWT: ' + sessionData.session.access_token.slice(0, 20) + '...');
+        } else {
+          log('   ❌ No session - please sign in');
+          return;
+        }
+
+        // 2. Check tenant
+        log('\n2️⃣ Checking tenant...');
+        const tenantId = document.getElementById('tenantId').value.trim();
+        if (tenantId) {
+          log('   ✅ Tenant ID: ' + tenantId);
+        } else {
+          log('   ❌ No tenant ID provided');
+          return;
+        }
+
+        // 3. Test CORS preflight
+        log('\n3️⃣ Testing CORS preflight (OPTIONS)...');
+        const url = document.getElementById('supabaseUrl').value.trim();
+        const optionsRes = await fetch(`${url}/functions/v1/ai_gateway`, {
+          method: 'OPTIONS',
+          headers: {
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'authorization, content-type, apikey',
+          }
+        });
+        log('   Status: ' + optionsRes.status);
+        if (optionsRes.status === 204 || optionsRes.status === 200) {
+          log('   ✅ CORS configured');
+        } else {
+          log('   ⚠️  Unexpected CORS status');
+        }
+
+        // 4. Test AI Gateway
+        log('\n4️⃣ Testing AI Gateway (POST)...');
+        const token = sessionData.session.access_token;
+        const anonKey = document.getElementById('anonKey').value.trim();
+
+        const startTime = performance.now();
+        const postRes = await fetch(`${url}/functions/v1/ai_gateway`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'apikey': anonKey,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tenant_id: tenantId,
+            mode: 'chat',
+            use_case: 'signal_assistant',
+            input: { question: 'Test' }
+          })
+        });
+        const duration = Math.round(performance.now() - startTime);
+
+        log('   Status: ' + postRes.status);
+        log('   Duration: ' + duration + 'ms');
+
+        const responseText = await postRes.text();
+
+        if (postRes.ok) {
+          log('   ✅ AI Gateway working!');
+          const result = JSON.parse(responseText);
+          log('\n📊 Response:');
+          log(JSON.stringify(result, null, 2));
+          statusEl.innerHTML = '<span class="status success">✅ All tests passed!</span>';
+        } else {
+          log('   ❌ Error: ' + responseText);
+          statusEl.innerHTML = '<span class="status error">❌ AI Gateway error</span>';
+        }
+
+      } catch (err) {
+        log('\n❌ Exception: ' + err.message);
+        log(err.stack);
+        statusEl.innerHTML = '<span class="status error">❌ Diagnostics failed</span>';
+        console.error('Diagnostics error:', err);
+      }
+    }
+
+    // Load saved values from localStorage
+    window.addEventListener('load', () => {
+      const savedUrl = localStorage.getItem('supabaseUrl');
+      const savedKey = localStorage.getItem('anonKey');
+      if (savedUrl) document.getElementById('supabaseUrl').value = savedUrl;
+      if (savedKey) document.getElementById('anonKey').value = savedKey;
+    });
+
+    // Save values to localStorage
+    document.getElementById('supabaseUrl').addEventListener('change', (e) => {
+      localStorage.setItem('supabaseUrl', e.target.value);
+    });
+    document.getElementById('anonKey').addEventListener('change', (e) => {
+      localStorage.setItem('anonKey', e.target.value);
+    });
+  </script>
+</body>
+</html>
