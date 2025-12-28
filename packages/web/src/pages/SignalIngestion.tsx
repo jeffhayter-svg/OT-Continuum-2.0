@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 1: Signal Ingestion
 // Read-only list of incoming signals
 // ============================================================================
@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { apiClient, Signal } from '../lib/api-client';
 
-export function SignalIngestion() {
+export default function SignalIngestion() {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -163,3 +163,6 @@ export function SignalIngestion() {
     </div>
   );
 }
+
+
+export { SignalIngestion };

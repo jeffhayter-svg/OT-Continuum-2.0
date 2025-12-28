@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // Assets Management Page
 // View and create assets for the active tenant
 // ============================================================================
@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { apiClient, Asset, Site } from '../lib/api-client';
 import { useTenant } from '../contexts/TenantContext';
 
-export function Assets() {
+export default function Assets() {
   const { activeTenantId } = useTenant();
   const [assets, setAssets] = useState<Asset[]>([]);
   const [sites, setSites] = useState<Site[]>([]);
@@ -352,7 +352,7 @@ export function Assets() {
               </div>
               
               <p className="text-sm text-gray-500 mb-2">
-                📍 {getSiteName(asset.site_id)}
+                ðŸ“ {getSiteName(asset.site_id)}
               </p>
               
               {asset.description && (
@@ -372,3 +372,6 @@ export function Assets() {
     </div>
   );
 }
+
+
+export { Assets };

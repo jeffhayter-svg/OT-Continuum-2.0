@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 7: Execution Tracking
 // Track work items and mitigation actions
 // ============================================================================
@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { apiClient, WorkItem } from '../lib/api-client';
 
-export function ExecutionTracking() {
+export default function ExecutionTracking() {
   const [workItems, setWorkItems] = useState<WorkItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -279,3 +279,6 @@ export function ExecutionTracking() {
     </div>
   );
 }
+
+
+export { ExecutionTracking };

@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 7: Risk Adjustment
 // Adjust risk severity/likelihood and track history
 // ============================================================================
@@ -11,7 +11,7 @@ interface RiskAdjustmentProps {
   riskId?: string;
 }
 
-export function RiskAdjustment({ onNavigate, riskId }: RiskAdjustmentProps = {}) {
+export default function RiskAdjustment({ onNavigate, riskId }: RiskAdjustmentProps = {}) {
   const [risk, setRisk] = useState<Risk | null>(null);
   const [events, setEvents] = useState<RiskEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -105,7 +105,7 @@ export function RiskAdjustment({ onNavigate, riskId }: RiskAdjustmentProps = {})
           className="text-blue-600 hover:text-blue-800 mb-2"
           data-testid="back-button"
         >
-          ← Back to Risk Register
+          â† Back to Risk Register
         </button>
         <h1 className="text-2xl mb-2" data-testid="page-title">
           Risk Adjustment
@@ -254,7 +254,7 @@ export function RiskAdjustment({ onNavigate, riskId }: RiskAdjustmentProps = {})
                         className={`text-sm ${scoreChange > 0 ? 'text-red-600' : 'text-green-600'}`}
                         data-testid="score-change"
                       >
-                        {scoreChange > 0 ? '↑' : '↓'} {Math.abs(scoreChange)} points
+                        {scoreChange > 0 ? 'â†‘' : 'â†“'} {Math.abs(scoreChange)} points
                       </div>
                     )}
                   </div>
@@ -364,3 +364,5 @@ export function RiskAdjustment({ onNavigate, riskId }: RiskAdjustmentProps = {})
     </div>
   );
 }
+
+export { RiskAdjustment };

@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // Tenant Resolver - Post-Login Gate
 // Determines if user needs onboarding or can proceed to app
 // ============================================================================
@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient, MeResponse } from '../lib/api-client';
 import { useAuth } from '../contexts/AuthContext';
-import { isNoSessionError } from '../../../../lib/edgeFetch';
+import { isNoSessionError } from "../lib/api-client";
 
-export function TenantResolver() {
+export default function TenantResolver() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -160,3 +160,7 @@ export function TenantResolver() {
   // This should not be reached as navigation happens in the effect
   return null;
 }
+
+
+
+export { TenantResolver };

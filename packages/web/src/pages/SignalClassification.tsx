@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 2: Signal Classification
 // Classify signals as normal, warning, alarm, etc.
 // ============================================================================
@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { apiClient, Signal } from '../lib/api-client';
 
-export function SignalClassification() {
+export default function SignalClassification() {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -157,3 +157,6 @@ export function SignalClassification() {
     </div>
   );
 }
+
+
+export { SignalClassification };

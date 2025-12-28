@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 4: Risk Register Update
 // View and update risk register with risk cards
 // ============================================================================
@@ -10,7 +10,7 @@ interface RiskRegisterProps {
   onNavigate?: (page: string, params?: any) => void;
 }
 
-export function RiskRegister({ onNavigate }: RiskRegisterProps = {}) {
+export default function RiskRegister({ onNavigate }: RiskRegisterProps = {}) {
   const [risks, setRisks] = useState<Risk[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -206,7 +206,7 @@ export function RiskRegister({ onNavigate }: RiskRegisterProps = {}) {
               {/* Related Work Item */}
               {risk.related_work_item_id && (
                 <div className="mt-2 text-xs text-blue-600" data-testid="related-work-item">
-                  🔗 Linked to work item
+                  ðŸ”— Linked to work item
                 </div>
               )}
             </div>
@@ -223,3 +223,5 @@ export function RiskRegister({ onNavigate }: RiskRegisterProps = {}) {
     </div>
   );
 }
+
+export { RiskRegister };

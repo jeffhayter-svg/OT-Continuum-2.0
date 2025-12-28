@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // Sites Management Page
 // View and create sites for the active tenant
 // ============================================================================
@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { apiClient, Site } from '../lib/api-client';
 import { useTenant } from '../contexts/TenantContext';
 
-export function Sites() {
+export default function Sites() {
   const { activeTenantId } = useTenant();
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
@@ -249,7 +249,7 @@ export function Sites() {
               )}
               
               {site.location && (
-                <p className="text-sm text-gray-500">📍 {site.location}</p>
+                <p className="text-sm text-gray-500">ðŸ“ {site.location}</p>
               )}
               
               {site.site_type && (
@@ -262,3 +262,6 @@ export function Sites() {
     </div>
   );
 }
+
+
+export { Sites };

@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 3: Signal Correlation
 // Group related signals together
 // ============================================================================
@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { apiClient, Signal } from '../lib/api-client';
 
-export function SignalCorrelation() {
+export default function SignalCorrelation() {
   const [signals, setSignals] = useState<Signal[]>([]);
   const [selectedSignals, setSelectedSignals] = useState<Set<string>>(new Set());
   const [correlationGroup, setCorrelationGroup] = useState('');
@@ -202,7 +202,7 @@ export function SignalCorrelation() {
                         <span data-testid="signal-value">
                           {signal.value.toFixed(2)} {signal.unit}
                         </span>
-                        {' • '}
+                        {' â€¢ '}
                         <span data-testid="signal-timestamp">
                           {new Date(signal.measured_at).toLocaleString()}
                         </span>
@@ -218,3 +218,6 @@ export function SignalCorrelation() {
     </div>
   );
 }
+
+
+export { SignalCorrelation };

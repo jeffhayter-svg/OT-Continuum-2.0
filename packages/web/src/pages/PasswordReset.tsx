@@ -1,13 +1,13 @@
-// ============================================================================
+﻿// ============================================================================
 // Password Reset Page
 // Send password reset email via Supabase Auth
 // ============================================================================
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/api-client';
+import { supabase } from "../lib/supabase";
 
-export function PasswordReset() {
+export default function PasswordReset() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -81,7 +81,7 @@ export function PasswordReset() {
                     className="text-blue-600 hover:text-blue-800 text-sm"
                     data-testid="back-to-login-link"
                   >
-                    ← Back to Login
+                    â† Back to Login
                   </Link>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export function PasswordReset() {
                   className="text-sm text-slate-600 hover:text-slate-900"
                   data-testid="back-link"
                 >
-                  ← Back to Login
+                  â† Back to Login
                 </Link>
               </div>
             </>
@@ -148,3 +148,5 @@ export function PasswordReset() {
     </div>
   );
 }
+
+

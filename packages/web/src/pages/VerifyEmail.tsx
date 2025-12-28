@@ -1,13 +1,13 @@
-// ============================================================================
+﻿// ============================================================================
 // Verify Email Page
 // Email verification instructions and resend functionality
 // ============================================================================
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { supabase } from '../lib/api-client';
+import { supabase } from "../lib/supabase";
 
-export function VerifyEmail() {
+export default function VerifyEmail() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email') || '';
@@ -141,7 +141,7 @@ export function VerifyEmail() {
                   Resending...
                 </span>
               ) : resendSuccess ? (
-                'Email Sent ✓'
+                'Email Sent âœ“'
               ) : (
                 'Resend Verification Email'
               )}
@@ -162,7 +162,7 @@ export function VerifyEmail() {
               className="block w-full text-center border border-slate-300 text-slate-700 py-2.5 rounded-md hover:bg-slate-50 transition-colors"
               data-testid="go-to-login-button"
             >
-              I've Verified — Sign In
+              I've Verified â€” Sign In
             </Link>
           </div>
 
@@ -176,23 +176,23 @@ export function VerifyEmail() {
               
               <ul className="space-y-2 text-xs text-slate-600">
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-0.5">•</span>
+                  <span className="text-blue-600 mr-2 mt-0.5">â€¢</span>
                   <span><strong>Check spam/junk folder:</strong> Sometimes verification emails are filtered.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-0.5">•</span>
+                  <span className="text-blue-600 mr-2 mt-0.5">â€¢</span>
                   <span><strong>Wait a few minutes:</strong> Email delivery can take 1-5 minutes.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-0.5">•</span>
+                  <span className="text-blue-600 mr-2 mt-0.5">â€¢</span>
                   <span><strong>Check the email address:</strong> Make sure {email} is correct.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-0.5">•</span>
+                  <span className="text-blue-600 mr-2 mt-0.5">â€¢</span>
                   <span><strong>Add to safe senders:</strong> Add noreply@supabase.io to your contacts.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-0.5">•</span>
+                  <span className="text-blue-600 mr-2 mt-0.5">â€¢</span>
                   <span><strong>Resend:</strong> Use the button above to request a new verification email.</span>
                 </li>
               </ul>
@@ -220,3 +220,5 @@ export function VerifyEmail() {
     </div>
   );
 }
+
+

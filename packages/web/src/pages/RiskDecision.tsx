@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // MS2 Screen 5: Risk Decision
 // Make risk decisions (Accept, Mitigate, Transfer, Avoid)
 // ============================================================================
@@ -11,7 +11,7 @@ interface RiskDecisionProps {
   riskId?: string;
 }
 
-export function RiskDecision({ onNavigate, riskId }: RiskDecisionProps = {}) {
+export default function RiskDecision({ onNavigate, riskId }: RiskDecisionProps = {}) {
   const [risk, setRisk] = useState<Risk | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -114,7 +114,7 @@ export function RiskDecision({ onNavigate, riskId }: RiskDecisionProps = {}) {
           className="text-blue-600 hover:text-blue-800 mb-2"
           data-testid="back-button"
         >
-          ← Back to Risk Register
+          â† Back to Risk Register
         </button>
         <h1 className="text-2xl mb-2" data-testid="page-title">
           Risk Decision
@@ -282,3 +282,5 @@ export function RiskDecision({ onNavigate, riskId }: RiskDecisionProps = {}) {
     </div>
   );
 }
+
+export { RiskDecision };

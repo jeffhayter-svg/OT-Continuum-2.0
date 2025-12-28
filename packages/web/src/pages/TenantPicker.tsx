@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // Tenant Picker - Choose Organization (for users with multiple tenants)
 // ============================================================================
 
@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserTenant } from '../lib/api-client';
 
-export function TenantPicker() {
+export default function TenantPicker() {
   const navigate = useNavigate();
   const [tenants, setTenants] = useState<UserTenant[]>([]);
 
@@ -156,7 +156,7 @@ export function TenantPicker() {
                 className="text-sm text-blue-600 hover:text-blue-800 font-medium"
                 data-testid="create-org-button"
               >
-                Get Started →
+                Get Started â†’
               </button>
             </div>
           </div>
@@ -172,3 +172,4 @@ export function TenantPicker() {
     </div>
   );
 }
+
